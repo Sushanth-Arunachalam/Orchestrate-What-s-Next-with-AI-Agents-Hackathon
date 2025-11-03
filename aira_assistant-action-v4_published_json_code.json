@@ -1,0 +1,3411 @@
+{
+  "name": "AIRA_Assistant-action",
+  "type": "action",
+  "counts": {
+    "actions": 11,
+    "intents": 8,
+    "entities": 7,
+    "data_types": 0,
+    "collections": 0,
+    "global_variables": 3
+  },
+  "status": "Available",
+  "language": "en",
+  "skill_id": "8d90be4d-d0b0-4fc4-8aea-b16e85a8314a",
+  "workspace": {
+    "actions": [
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_642",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Hi! I’m AIRA - your AI assistant for city infrastructure issues.\n\nI can help with potholes, pipe leaks, or broken streetlights.\n\nLet’s report the problem!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_14520",
+                "policy": "default",
+                "parameters": [],
+                "result_variable": "step_642_result_1",
+                "ignore_end_action_steps": false,
+                "suppress_response_display": false
+              }
+            },
+            "variable": "step_642"
+          }
+        ],
+        "title": "Greet Action_Initialization_Action",
+        "action": "action_29510",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_29510_intent_35100"
+        },
+        "variables": [
+          {
+            "title": "Hi! I’m AIRA - your AI assistant for city infrastructure issues.",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_642",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_642_result_1",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "fallback",
+        "display_name": "Greet User ",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_805",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "What problem are you reporting today?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Road Issue",
+                      "value": {
+                        "input": {
+                          "text": "Road Issue"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Water Issue",
+                      "value": {
+                        "input": {
+                          "text": "Water Issue"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Electricity Issue",
+                      "value": {
+                        "input": {
+                          "text": "Electricity Issue"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "I didn't catch that. Select a valid option:"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "entity_31794",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_805",
+            "next_step": "step_432"
+          },
+          {
+            "step": "step_432",
+            "type": "standard",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_49897",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_432_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_432",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_805"
+                },
+                {
+                  "value": "Road Issue",
+                  "from_entity": "entity_31794"
+                }
+              ]
+            },
+            "next_step": "step_370"
+          },
+          {
+            "step": "step_370",
+            "type": "standard",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_49617",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_370_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_370",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_805"
+                },
+                {
+                  "value": "Water Issue",
+                  "from_entity": "entity_31794"
+                }
+              ]
+            },
+            "next_step": "step_693"
+          },
+          {
+            "step": "step_693",
+            "type": "standard",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_44136",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_693_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_693",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_805"
+                },
+                {
+                  "value": "Electricity Issue",
+                  "from_entity": "entity_31794"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Issue_Classification_Action",
+        "action": "action_14520",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_14520_intent_32743"
+        },
+        "variables": [
+          {
+            "title": "No response",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_370",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_370_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_432",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_432_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_693",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_693_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "What problem are you reporting today?",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_805",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_29510",
+        "display_name": "Identifies & routes it to respective issue sub action",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_227",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Please select that apply"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Pothole in the road",
+                      "value": {
+                        "input": {
+                          "text": "Pothole in the road"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Broken curb or sidewalk",
+                      "value": {
+                        "input": {
+                          "text": "Broken curb or sidewalk"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Damaged traffic sign or pole",
+                      "value": {
+                        "input": {
+                          "text": "Damaged traffic sign or pole"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Other road issue",
+                      "value": {
+                        "input": {
+                          "text": "Other road issue"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "context": {
+              "variables": []
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "I didn't catch that. Select a valid option:"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "entity_12261",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_227",
+            "next_step": "step_262"
+          },
+          {
+            "step": "step_262",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Please describe the issue"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": []
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_262",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_227"
+                },
+                {
+                  "value": "Other road issue",
+                  "from_entity": "entity_12261"
+                }
+              ]
+            },
+            "next_step": "step_908"
+          },
+          {
+            "step": "step_908",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Thanks for letting us know. Where is it located? Please give the full address."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_227"
+                  },
+                  "skill_variable": "issue_type"
+                }
+              ]
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_908",
+            "next_step": "step_675"
+          },
+          {
+            "step": "step_675",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Your issue for "
+                          },
+                          {
+                            "variable": "step_262"
+                          },
+                          {
+                            "scalar": " at "
+                          },
+                          {
+                            "skill_variable": "Location"
+                          },
+                          {
+                            "scalar": " has been logged.\n\nOur AI agents are now processing it. Thank you for reporting!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_908"
+                  },
+                  "skill_variable": "Location"
+                },
+                {
+                  "value": {
+                    "variable": "step_262"
+                  },
+                  "skill_variable": "issue_type"
+                },
+                {
+                  "value": {
+                    "scalar": "Road"
+                  },
+                  "skill_variable": "issue_category"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_11462",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_675_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_675",
+            "condition": {
+              "and": [
+                {
+                  "exists": {
+                    "variable": "step_262"
+                  }
+                },
+                {
+                  "eq": [
+                    {
+                      "variable": "step_227"
+                    },
+                    {
+                      "value": "Other road issue",
+                      "from_entity": "entity_12261"
+                    }
+                  ]
+                },
+                {
+                  "exists": {
+                    "variable": "step_908"
+                  }
+                }
+              ]
+            },
+            "next_step": "step_318"
+          },
+          {
+            "step": "step_318",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Your issue for "
+                          },
+                          {
+                            "skill_variable": "issue_type"
+                          },
+                          {
+                            "scalar": " at "
+                          },
+                          {
+                            "skill_variable": "Location"
+                          },
+                          {
+                            "scalar": " has been logged.\n\n<br />\n\n\n\nOur AI agents are now processing it. Thank you for reporting!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_227"
+                  },
+                  "skill_variable": "issue_type"
+                },
+                {
+                  "value": {
+                    "variable": "step_908"
+                  },
+                  "skill_variable": "Location"
+                },
+                {
+                  "value": {
+                    "scalar": "Road"
+                  },
+                  "skill_variable": "issue_category"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_11462",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_318_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_318",
+            "condition": {
+              "and": [
+                {
+                  "neq": [
+                    {
+                      "variable": "step_227"
+                    },
+                    {
+                      "value": "Other road issue",
+                      "from_entity": "entity_12261"
+                    }
+                  ]
+                },
+                {
+                  "exists": {
+                    "variable": "step_908"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Road_Issues_Action",
+        "action": "action_49897",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_49897_intent_39977"
+        },
+        "variables": [
+          {
+            "title": "Please select that apply",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_227",
+            "data_type": "any"
+          },
+          {
+            "title": "Please describe the issue",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_262",
+            "data_type": "any"
+          },
+          {
+            "title": "Your issue for {variable} at {variable} has been logged. <br /> ",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_318",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_318_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Your issue for {variable} at {variable} has been logged. Our AI ",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_675",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_675_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Thanks for letting us know. Where is it located? Please give the",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_908",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_14520",
+        "display_name": "Report a road problem",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_637",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Please select all that apply"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Streetlight not working",
+                      "value": {
+                        "input": {
+                          "text": "Streetlight not working"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Exposed wire or electrical hazard",
+                      "value": {
+                        "input": {
+                          "text": "Exposed wire or electrical hazard"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Traffic signal malfunction",
+                      "value": {
+                        "input": {
+                          "text": "Traffic signal malfunction"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Other electrical issue",
+                      "value": {
+                        "input": {
+                          "text": "Other electrical issue"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "I didn't catch that. Select a valid option:"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "entity_38412",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_637",
+            "next_step": "step_368"
+          },
+          {
+            "step": "step_368",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Please describe the issue"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_637"
+                  },
+                  "skill_variable": "issue_type"
+                }
+              ]
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_368",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_637"
+                },
+                {
+                  "value": "Other electrical issue",
+                  "from_entity": "entity_38412"
+                }
+              ]
+            },
+            "next_step": "step_224"
+          },
+          {
+            "step": "step_224",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Thanks for letting us know. Where is it located? Please give the full address."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": []
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_224",
+            "next_step": "step_493"
+          },
+          {
+            "step": "step_493",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Your issue for "
+                          },
+                          {
+                            "variable": "step_368"
+                          },
+                          {
+                            "scalar": " at "
+                          },
+                          {
+                            "skill_variable": "Location"
+                          },
+                          {
+                            "scalar": " has been logged.\n\nOur AI agents are now processing it. Thank you for reporting!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_224"
+                  },
+                  "skill_variable": "Location"
+                },
+                {
+                  "value": {
+                    "variable": "step_368"
+                  },
+                  "skill_variable": "issue_type"
+                },
+                {
+                  "value": {
+                    "scalar": "Electricity"
+                  },
+                  "skill_variable": "issue_category"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_11462",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_493_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_493",
+            "condition": {
+              "and": [
+                {
+                  "exists": {
+                    "variable": "step_368"
+                  }
+                },
+                {
+                  "exists": {
+                    "variable": "step_224"
+                  }
+                },
+                {
+                  "eq": [
+                    {
+                      "variable": "step_637"
+                    },
+                    {
+                      "value": "Other electrical issue",
+                      "from_entity": "entity_38412"
+                    }
+                  ]
+                }
+              ]
+            },
+            "next_step": "step_380"
+          },
+          {
+            "step": "step_380",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Your issue for  "
+                          },
+                          {
+                            "skill_variable": "issue_type"
+                          },
+                          {
+                            "scalar": " at "
+                          },
+                          {
+                            "skill_variable": "Location"
+                          },
+                          {
+                            "scalar": " has been logged.\n\nOur AI agents are now processing it. Thank you for reporting!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_224"
+                  },
+                  "skill_variable": "Location"
+                },
+                {
+                  "value": {
+                    "variable": "step_637"
+                  },
+                  "skill_variable": "issue_type"
+                },
+                {
+                  "value": {
+                    "scalar": "Electricity"
+                  },
+                  "skill_variable": "issue_category"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_11462",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_380_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_380",
+            "condition": {
+              "and": [
+                {
+                  "neq": [
+                    {
+                      "variable": "step_637"
+                    },
+                    {
+                      "value": "Other electrical issue",
+                      "from_entity": "entity_38412"
+                    }
+                  ]
+                },
+                {
+                  "exists": {
+                    "variable": "step_224"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Electrical_Issues_Action",
+        "action": "action_44136",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_44136_intent_16075"
+        },
+        "variables": [
+          {
+            "title": "Thanks for letting us know. Where is it located? Please give the",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_224",
+            "data_type": "any"
+          },
+          {
+            "title": "Please describe the issue",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_368",
+            "data_type": "any"
+          },
+          {
+            "title": "Your issue for {variable} at {variable} has been logged. Our AI ",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_380",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_380_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Your issue for {variable} at {variable} has been logged. Our AI ",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_493",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_493_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Please select all that apply",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_637",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_49897",
+        "display_name": "Report an issue with electricity",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_471",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Please select all that apply"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Water pipe leak",
+                      "value": {
+                        "input": {
+                          "text": "Water pipe leak"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Broken valve or hydrant",
+                      "value": {
+                        "input": {
+                          "text": "Broken valve or hydrant"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Drainage blockage",
+                      "value": {
+                        "input": {
+                          "text": "Drainage blockage"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Other water issue",
+                      "value": {
+                        "input": {
+                          "text": "Other water issue"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "I didn't catch that. Select a valid option:"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "entity_11689",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_471",
+            "next_step": "step_218"
+          },
+          {
+            "step": "step_218",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Please describe the issue"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_471"
+                  },
+                  "skill_variable": "issue_type"
+                }
+              ]
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_218",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_471"
+                },
+                {
+                  "value": "Other water issue",
+                  "from_entity": "entity_11689"
+                }
+              ]
+            },
+            "next_step": "step_267"
+          },
+          {
+            "step": "step_267",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Thanks for letting us know. Where is it located? Please give the full address."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_471"
+                  },
+                  "skill_variable": "issue_type"
+                }
+              ]
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_267",
+            "condition": {
+              "exists": {
+                "variable": "step_471"
+              }
+            },
+            "next_step": "step_510"
+          },
+          {
+            "step": "step_510",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Your issue for "
+                          },
+                          {
+                            "variable": "step_218"
+                          },
+                          {
+                            "scalar": " at "
+                          },
+                          {
+                            "skill_variable": "Location"
+                          },
+                          {
+                            "scalar": " has been logged.\n\nOur AI agents are now processing it. Thank you for reporting!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_218"
+                  },
+                  "skill_variable": "issue_type"
+                },
+                {
+                  "value": {
+                    "variable": "step_267"
+                  },
+                  "skill_variable": "Location"
+                },
+                {
+                  "value": {
+                    "scalar": "Water"
+                  },
+                  "skill_variable": "issue_category"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_11462",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_510_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_510",
+            "condition": {
+              "and": [
+                {
+                  "eq": [
+                    {
+                      "variable": "step_471"
+                    },
+                    {
+                      "value": "Other water issue",
+                      "from_entity": "entity_11689"
+                    }
+                  ]
+                },
+                {
+                  "exists": {
+                    "variable": "step_267"
+                  }
+                },
+                {
+                  "exists": {
+                    "variable": "step_218"
+                  }
+                }
+              ]
+            },
+            "next_step": "step_892"
+          },
+          {
+            "step": "step_892",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Your issue for "
+                          },
+                          {
+                            "skill_variable": "issue_type"
+                          },
+                          {
+                            "scalar": " at "
+                          },
+                          {
+                            "skill_variable": "Location"
+                          },
+                          {
+                            "scalar": " has been logged.\n\nOur AI agents are now processing it. Thank you for reporting!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_471"
+                  },
+                  "skill_variable": "issue_type"
+                },
+                {
+                  "value": {
+                    "variable": "step_267"
+                  },
+                  "skill_variable": "Location"
+                },
+                {
+                  "value": {
+                    "scalar": "Water"
+                  },
+                  "skill_variable": "issue_category"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_11462",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_892_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_892",
+            "condition": {
+              "and": [
+                {
+                  "neq": [
+                    {
+                      "variable": "step_471"
+                    },
+                    {
+                      "value": "Other water issue",
+                      "from_entity": "entity_11689"
+                    }
+                  ]
+                },
+                {
+                  "exists": {
+                    "variable": "step_267"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Water_Issues_Action",
+        "action": "action_49617",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_49617_intent_5203"
+        },
+        "variables": [
+          {
+            "title": "Please describe the issue",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_218",
+            "data_type": "any"
+          },
+          {
+            "title": "Thanks for letting us know. Where is it located? Please give the",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_267",
+            "data_type": "any"
+          },
+          {
+            "title": "Please select all that apply",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_471",
+            "data_type": "any"
+          },
+          {
+            "title": "Your issue for {variable} at {variable} has been logged. Our AI ",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_510",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_510_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Your issue for {variable} at {variable} has been logged. Our AI ",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_892",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_892_result_1",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_44136",
+        "display_name": "Report a water issue",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_807",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Routed the issue to "
+                          },
+                          {
+                            "skill_variable": "issue_category"
+                          },
+                          {
+                            "scalar": " Department\n\n<br />\n\n\n\nTicket Number : AIRA_"
+                          },
+                          {
+                            "system_variable": "current_time"
+                          },
+                          {
+                            "scalar": "_"
+                          },
+                          {
+                            "system_variable": "current_date"
+                          },
+                          {
+                            "scalar": "_*"
+                          },
+                          {
+                            "skill_variable": "issue_category"
+                          },
+                          {
+                            "scalar": "*_2754314\nIssue : "
+                          },
+                          {
+                            "skill_variable": "issue_type"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Location : "
+                          },
+                          {
+                            "skill_variable": "Location"
+                          },
+                          {
+                            "scalar": "\n\nCategory : "
+                          },
+                          {
+                            "skill_variable": "issue_category"
+                          },
+                          {
+                            "scalar": "\n\nReported Date : "
+                          },
+                          {
+                            "system_variable": "current_date"
+                          },
+                          {
+                            "scalar": "\nReported Time : "
+                          },
+                          {
+                            "system_variable": "current_time"
+                          },
+                          {
+                            "scalar": "\n\nReported Timezone : "
+                          },
+                          {
+                            "system_variable": "timezone"
+                          },
+                          {
+                            "scalar": "\n\nScheduled: Crew will inspect the site tomorrow 10:00 AM\n\n<br />\n\n\n\nThank you for reporting!!!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": []
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_40392",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_807_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_807",
+            "condition": {
+              "contains": [
+                {
+                  "skill_variable": "issue_category"
+                },
+                {
+                  "scalar": "Road",
+                  "options": {
+                    "ignore_case": true
+                  }
+                }
+              ]
+            },
+            "next_step": "step_301"
+          },
+          {
+            "step": "step_301",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Routed the issue to "
+                          },
+                          {
+                            "skill_variable": "issue_category"
+                          },
+                          {
+                            "scalar": " Department\n\n<br />\n\n\n\nTicket Number : AIRA_"
+                          },
+                          {
+                            "system_variable": "current_time"
+                          },
+                          {
+                            "scalar": "_"
+                          },
+                          {
+                            "system_variable": "current_date"
+                          },
+                          {
+                            "scalar": "_*"
+                          },
+                          {
+                            "skill_variable": "issue_category"
+                          },
+                          {
+                            "scalar": "*_9673678\nIssue : "
+                          },
+                          {
+                            "skill_variable": "issue_type"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Location : "
+                          },
+                          {
+                            "skill_variable": "Location"
+                          },
+                          {
+                            "scalar": "\n\nCategory : "
+                          },
+                          {
+                            "skill_variable": "issue_category"
+                          },
+                          {
+                            "scalar": "\n\nReported Date : "
+                          },
+                          {
+                            "system_variable": "current_date"
+                          },
+                          {
+                            "scalar": "\nReported Time : "
+                          },
+                          {
+                            "system_variable": "current_time"
+                          },
+                          {
+                            "scalar": "\n\nReported Timezone : "
+                          },
+                          {
+                            "system_variable": "timezone"
+                          },
+                          {
+                            "scalar": "\n\nScheduled: Crew will inspect the site tomorrow 10:00 AM\n\n<br />\n\n\n\nThank you for reporting!!!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_40392",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_301_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_301",
+            "condition": {
+              "contains": [
+                {
+                  "skill_variable": "issue_category"
+                },
+                {
+                  "scalar": "Water",
+                  "options": {
+                    "ignore_case": true
+                  }
+                }
+              ]
+            },
+            "next_step": "step_806"
+          },
+          {
+            "step": "step_806",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Routed the issue to "
+                          },
+                          {
+                            "skill_variable": "issue_category"
+                          },
+                          {
+                            "scalar": " Department\n\n<br />\n\n\n\nTicket Number : AIRA_"
+                          },
+                          {
+                            "system_variable": "current_time"
+                          },
+                          {
+                            "scalar": "_"
+                          },
+                          {
+                            "system_variable": "current_date"
+                          },
+                          {
+                            "scalar": "_*"
+                          },
+                          {
+                            "skill_variable": "issue_category"
+                          },
+                          {
+                            "scalar": "*_6524781\nIssue : "
+                          },
+                          {
+                            "skill_variable": "issue_type"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Location : "
+                          },
+                          {
+                            "skill_variable": "Location"
+                          },
+                          {
+                            "scalar": "\n\nCategory : "
+                          },
+                          {
+                            "skill_variable": "issue_category"
+                          },
+                          {
+                            "scalar": "\n\nReported Date : "
+                          },
+                          {
+                            "system_variable": "current_date"
+                          },
+                          {
+                            "scalar": "\nReported Time : "
+                          },
+                          {
+                            "system_variable": "current_time"
+                          },
+                          {
+                            "scalar": "\n\nReported Timezone : "
+                          },
+                          {
+                            "system_variable": "timezone"
+                          },
+                          {
+                            "scalar": "\n\nScheduled: Crew will inspect the site tomorrow 10:00 AM\n\n<br />\n\n\n\nThank you for reporting!!!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_40392",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_806_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_806",
+            "condition": {
+              "contains": [
+                {
+                  "skill_variable": "issue_category"
+                },
+                {
+                  "scalar": "Electricity",
+                  "options": {
+                    "ignore_case": true
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "title": "WorkQueue_Assignment_Action",
+        "action": "action_11462",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_11462_intent_44238"
+        },
+        "variables": [
+          {
+            "title": "Routed the issue to {variable} Department <br /> Ticket Number :",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_301",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_301_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Routed the issue to {variable} Department <br /> Ticket Number :",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_806",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_806_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Routed the issue to {variable} Department <br /> Ticket Number :",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_807",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_807_result_1",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_49617",
+        "display_name": "Classifies & creates work assignment for issue",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_304",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Would you like to check the status of your issue?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Yes",
+                      "value": {
+                        "input": {
+                          "text": "Yes"
+                        }
+                      }
+                    },
+                    {
+                      "label": "No",
+                      "value": {
+                        "input": {
+                          "text": "No"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "I'm sorry, I did not catch that, please restate your response."
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-yes-no",
+              "max_tries": 3,
+              "response_collection_behavior": "always_ask"
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_304",
+            "next_step": "step_364"
+          },
+          {
+            "step": "step_364",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Checking system records...\n\n<br />\n\n\n\nCurrent status: **In Progress**\n\n\n"
+                          },
+                          {
+                            "skill_variable": "issue_category"
+                          },
+                          {
+                            "scalar": " Crew has been notified and team is expected to resolve it by 12:00 PM tomorrow."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_364",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_304"
+                },
+                {
+                  "scalar": "yes"
+                }
+              ]
+            },
+            "next_step": "step_844"
+          },
+          {
+            "step": "step_844",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Great! We'll notify you when it’s fixed. Thank you for reporting."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_29510",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_844_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_844",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_304"
+                },
+                {
+                  "scalar": "no"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Check_Issue_Status_Action",
+        "action": "action_40392",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_40392_intent_13784"
+        },
+        "variables": [
+          {
+            "title": "Would you like to check the status of your issue?",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_304",
+            "data_type": "yes_no"
+          },
+          {
+            "title": "Checking system records... <br /> Current status: **In Progress*",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_364",
+            "data_type": "any"
+          },
+          {
+            "title": "Great! We'll notify you when it’s fixed. Thank you for reporting",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_844",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_844_result_1",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_11462",
+        "display_name": "Checks the current issue status",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "digression_failure",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Sorry I couldn't confirm if you wanted to return to previous topic, let me connect to an agent."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Let's send you to an available agent."
+                },
+                "agent_unavailable": {
+                  "message": "There are no agents available at this time. When one becomes available, we'll connect you."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "digression_failure",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Failed to confirm topic return"
+                }
+              ]
+            },
+            "next_step": "step_001"
+          },
+          {
+            "step": "step_001",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "I'm afraid I don't understand. I can connect you to an agent."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Let's send you to an available agent."
+                },
+                "agent_unavailable": {
+                  "message": "There are no agents available at this time. When one becomes available, we'll connect you."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_001",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Step validation failed"
+                }
+              ]
+            },
+            "next_step": "step_002"
+          },
+          {
+            "step": "step_002",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Sorry I couldn't assist you. I will connect you to an agent right away."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Let's send you to an available agent."
+                },
+                "agent_unavailable": {
+                  "message": "There are no agents available at this time. When one becomes available, we'll connect you."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_002",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Agent requested"
+                }
+              ]
+            },
+            "next_step": "step_003"
+          },
+          {
+            "step": "step_003",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "I am afraid I do not understand what you are asking, let me connect you to an agent."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Let's send you to an available agent."
+                },
+                "agent_unavailable": {
+                  "message": "There are no agents available at this time. When one becomes available, we'll connect you."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_003",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "No action matches"
+                }
+              ]
+            },
+            "next_step": "step_004"
+          },
+          {
+            "step": "step_004",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "It seems this conversation would be best managed by a human agent. Let me connect you to one of our agents."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Let's send you to an available agent."
+                },
+                "agent_unavailable": {
+                  "message": "There are no agents available at this time. When one becomes available, we'll connect you."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_004",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Danger word detected"
+                }
+              ]
+            },
+            "next_step": "step_005"
+          },
+          {
+            "step": "step_005",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "It seems this conversation would be best managed by a human agent. Let me connect you to one of our agents."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Let's send you to an available agent."
+                },
+                "agent_unavailable": {
+                  "message": "There are no agents available at this time. When one becomes available, we'll connect you."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_005",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Profanity detected"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Fallback",
+        "action": "fallback",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "fallback_connect_to_agent"
+        },
+        "variables": [
+          {
+            "title": "Topic return failed",
+            "variable": "digression_failure",
+            "data_type": "any"
+          },
+          {
+            "title": "I'm afraid I don't understand. I can connect you to an agent.",
+            "variable": "step_001",
+            "data_type": "any"
+          },
+          {
+            "title": "Sorry I couldn't assist you. I will connect you to an agent righ",
+            "variable": "step_002",
+            "data_type": "any"
+          },
+          {
+            "title": "I am afraid I do not understand what you are asking, let me conn",
+            "variable": "step_003",
+            "data_type": "any"
+          },
+          {
+            "title": "It seems this conversation would be best managed",
+            "variable": "step_004",
+            "data_type": "any"
+          },
+          {
+            "title": "Profanity - It seems this conversation",
+            "variable": "step_005",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "run_always",
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "danger_word_detected",
+            "type": "standard",
+            "title": "Connect to agent",
+            "handlers": [],
+            "resolver": {
+              "type": "fallback"
+            },
+            "variable": "danger_word_detected_variable",
+            "condition": {
+              "entity": "danger_words"
+            },
+            "next_step": "profanity_detected"
+          },
+          {
+            "step": "profanity_detected",
+            "type": "standard",
+            "title": "Show warning",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Please use appropriate language when interacting with the assistant."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "max_hits",
+                "handler": "max_hits_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "max_hits": 2,
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "profanity_detected_variable",
+            "condition": {
+              "entity": "profane_words"
+            }
+          }
+        ],
+        "title": "Trigger word detected",
+        "action": "run_always",
+        "boosts": [],
+        "handlers": [],
+        "variables": [
+          {
+            "title": "Profanity detected",
+            "variable": "danger_word_detected_variable",
+            "data_type": "any"
+          },
+          {
+            "title": "Profane word detected",
+            "variable": "profanity_detected_variable",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "anything_else"
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_001",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "I'm afraid I don't understand. Please rephrase your question."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_001",
+            "condition": {
+              "lte": [
+                {
+                  "system_variable": "no_action_matches_count"
+                },
+                {
+                  "scalar": 3
+                }
+              ]
+            },
+            "next_step": "step_002"
+          },
+          {
+            "step": "step_002",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "fallback",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_002_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_002",
+            "condition": {
+              "gt": [
+                {
+                  "system_variable": "no_action_matches_count"
+                },
+                {
+                  "scalar": 3
+                }
+              ]
+            }
+          }
+        ],
+        "title": "No matches",
+        "action": "anything_else",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "expression": "anything_else"
+        },
+        "variables": [
+          {
+            "title": "I am afraid I do not understand what you are asking, please re-p",
+            "variable": "step_001",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_002",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_002_result_1",
+            "data_type": "any"
+          }
+        ],
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_001",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Hi! I’m AIRA - your AI assistant for city infrastructure issues.\nI can help with potholes, pipe leaks, or broken streetlights.\nLet’s report the problem!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_14520",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_001_result_2",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_001"
+          }
+        ],
+        "title": "Greet customer",
+        "action": "welcome",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "expression": "welcome"
+        },
+        "variables": [
+          {
+            "title": "Hi! I’m AIRA - your AI assistant for city infrastructure issues.",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_001",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_001_result_2",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_40392",
+        "disambiguation_opt_out": true
+      }
+    ],
+    "intents": [
+      {
+        "intent": "action_11462_intent_44238",
+        "examples": [
+          {
+            "text": "Issue_Direction_Simulation_Flow"
+          }
+        ]
+      },
+      {
+        "intent": "action_44136_intent_16075",
+        "examples": [
+          {
+            "text": "the electric pole makes weird noises"
+          },
+          {
+            "text": "the electric pole has some wires hanging down"
+          },
+          {
+            "text": "The electric pole has fumes coming out"
+          },
+          {
+            "text": "There is no power"
+          },
+          {
+            "text": "there is an issue with electric pole"
+          },
+          {
+            "text": "Broken Streetlight"
+          },
+          {
+            "text": "the street light is not working"
+          }
+        ]
+      },
+      {
+        "intent": "action_14520_intent_32743",
+        "examples": [
+          {
+            "text": "problem"
+          },
+          {
+            "text": "Water Issue"
+          },
+          {
+            "text": "Electricity Issue"
+          },
+          {
+            "text": "Road Issue"
+          },
+          {
+            "text": "I have an issue to report today"
+          },
+          {
+            "text": "issue"
+          },
+          {
+            "text": "report"
+          }
+        ]
+      },
+      {
+        "intent": "action_49897_intent_39977",
+        "examples": [
+          {
+            "text": "There's a pothole on Main Street"
+          },
+          {
+            "text": "There is a dent in the road"
+          },
+          {
+            "text": "There is a water log issue in the road"
+          },
+          {
+            "text": "the road is uneven"
+          },
+          {
+            "text": "the road is half completed"
+          },
+          {
+            "text": "the road is slippery"
+          },
+          {
+            "text": "the road is sticky"
+          }
+        ]
+      },
+      {
+        "intent": "action_49617_intent_5203",
+        "examples": [
+          {
+            "text": "There is a water leakage"
+          },
+          {
+            "text": "Water is contaminated"
+          },
+          {
+            "text": "No water supply"
+          },
+          {
+            "text": "water is flushing out from a tank"
+          },
+          {
+            "text": "water is oozing out from the ground"
+          },
+          {
+            "text": "the water pipe is broken"
+          },
+          {
+            "text": "The drainage system is broken"
+          }
+        ]
+      },
+      {
+        "intent": "action_29510_intent_35100",
+        "examples": []
+      },
+      {
+        "intent": "fallback_connect_to_agent",
+        "examples": [
+          {
+            "text": "Call agent"
+          },
+          {
+            "text": "Agent help"
+          },
+          {
+            "text": "I would like to speak to a human"
+          },
+          {
+            "text": "Can I connect to an agent?"
+          },
+          {
+            "text": "I would like to speak to someone"
+          }
+        ],
+        "description": "Please transfer me to an agent"
+      },
+      {
+        "intent": "action_40392_intent_13784",
+        "examples": [
+          {
+            "text": "Work_Item_Assignment_Action"
+          }
+        ]
+      }
+    ],
+    "entities": [
+      {
+        "entity": "entity_11689",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Other water issue",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Drainage blockage",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Water pipe leak",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Broken valve or hydrant",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "entity_38412",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Traffic signal malfunction",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Streetlight not working",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Exposed wire or electrical hazard",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Other electrical issue",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "danger_words",
+        "values": [],
+        "fuzzy_match": false
+      },
+      {
+        "entity": "entity_31794",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Road Issue",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Electricity Issue",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Water Issue",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "entity_12261",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Pothole in the road",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Broken curb or sidewalk",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Damaged traffic sign or pole",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Other road issue",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "sys-yes-no",
+        "values": []
+      },
+      {
+        "entity": "profane_words",
+        "values": [],
+        "fuzzy_match": false
+      }
+    ],
+    "metadata": {
+      "api_version": {
+        "major_version": "v2",
+        "minor_version": "2018-11-08"
+      },
+      "skill": {
+        "counts": {
+          "actions": 11,
+          "intents": 8,
+          "entities": 7,
+          "data_types": 0,
+          "collections": 0,
+          "global_variables": 3
+        }
+      }
+    },
+    "variables": [
+      {
+        "title": "Location",
+        "privacy": {
+          "enabled": false
+        },
+        "variable": "Location",
+        "data_type": "string",
+        "description": ""
+      },
+      {
+        "title": "issue_type",
+        "privacy": {
+          "enabled": false
+        },
+        "variable": "issue_type",
+        "data_type": "string",
+        "description": ""
+      },
+      {
+        "title": "issue_category",
+        "privacy": {
+          "enabled": false
+        },
+        "variable": "issue_category",
+        "data_type": "string",
+        "description": ""
+      }
+    ],
+    "data_types": [],
+    "collections": [],
+    "counterexamples": [],
+    "system_settings": {
+      "variable": {
+        "format": {
+          "time": {
+            "pattern": "short"
+          },
+          "currency": {
+            "fraction_digits": 2
+          }
+        }
+      },
+      "off_topic": {
+        "enabled": true
+      },
+      "auto_learn": {
+        "apply": true
+      },
+      "topic_switch": {
+        "enabled": true,
+        "messages": {
+          "enable_confirmation": true,
+          "confirmation_failure": {
+            "generic": [
+              {
+                "values": [
+                  {
+                    "text_expression": {
+                      "concat": [
+                        {
+                          "scalar": "I'm sorry, I did not catch that, please confirm."
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "response_type": "text",
+                "selection_policy": "sequential"
+              }
+            ]
+          },
+          "confirmation_request": {
+            "generic": [
+              {
+                "values": [
+                  {
+                    "text_expression": {
+                      "concat": [
+                        {
+                          "scalar": "Do you want to continue with the previous topic: "
+                        },
+                        {
+                          "system_variable": "digressed_from"
+                        },
+                        {
+                          "scalar": "?"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "response_type": "text",
+                "selection_policy": "sequential"
+              },
+              {
+                "options": [
+                  {
+                    "label": "Yes",
+                    "value": {
+                      "input": {
+                        "text": "Yes"
+                      }
+                    }
+                  },
+                  {
+                    "label": "No",
+                    "value": {
+                      "input": {
+                        "text": "No"
+                      }
+                    }
+                  }
+                ],
+                "response_type": "option",
+                "repeat_on_reprompt": true
+              }
+            ]
+          }
+        },
+        "max_tries": 3
+      },
+      "generative_ai": {
+        "model_id": "ibm/granite-3-8b-instruct",
+        "hap_filter": {
+          "output": {
+            "enabled": true
+          }
+        }
+      },
+      "disambiguation": {
+        "prompt": "Did you mean:",
+        "enabled": true,
+        "randomize": true,
+        "max_suggestions": 5,
+        "suggestion_text_policy": "title",
+        "none_of_the_above_prompt": "None of the above",
+        "use_connect_to_support_prompt": "Connect to support",
+        "single_answer_clarification_prompt": "Something else"
+      },
+      "search_routing": {
+        "target": "conversational_search"
+      },
+      "spelling_auto_correct": true
+    },
+    "learning_opt_out": true,
+    "language": "en"
+  },
+  "description": "created for assistant 52422261-af16-42f3-b801-79b7b6d59657",
+  "dialog_settings": {
+    "source_assistant": "d1245516-3eef-4855-b9dc-b46dfc7337b7"
+  },
+  "created": "2025-11-03T04:58:12.477Z",
+  "updated": "2025-11-03T04:58:12.477Z",
+  "snapshot": "4",
+  "assistant_id": "52422261-af16-42f3-b801-79b7b6d59657",
+  "assistant_references": [
+    {
+      "name": "AIRA_Assistant",
+      "assistant_id": "d1245516-3eef-4855-b9dc-b46dfc7337b7",
+      "skill_reference": "actions skill"
+    }
+  ]
+}
